@@ -19,7 +19,7 @@ titlebar.on("close", () => {
 });
 
 titlebar.on("fullscreen", () => {
-    remote.getCurrentWindow().setFullScreen(true);
+    remote.getCurrentWindow().maximize();
 });
 
 titlebar.on("minimize", () => {
@@ -27,6 +27,10 @@ titlebar.on("minimize", () => {
 });
 
 titlebar.on("maximize", () => {
-    remote.getCurrentWindow().setFullScreen(false);
-    remote.getCurrentWindow().maximize();
+    win = remote.getCurrentWindow();
+    if (win.isMaximized()) {
+        win.unmaximize();
+    } else {
+        win.maximize();
+    }
 });
