@@ -3,14 +3,35 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Electron App</title>
+  <title>Soundwave</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/feather-icons"></script>
 </head>
 
 <body>
   <div id="titlebar"></div>
-
+  <footer>
+    <div id="play-pause-toggle" data-feather="play"></div>
+    <div class="current-song-container">
+      <span id="current-time">0:00</span>
+      <div class="current-song">
+        <div class="marquee">
+          <p>
+            <span id="current-artist">Artist Name</span> -
+            <span id="current-title">Song Title</span>
+          </p>
+        </div>
+      </div>
+      <div id="progress-bar">
+        <div id="progress"></div>
+      </div>
+    </div>
+    <img id="current-artwork" src="http://placehold.it/100x100">
+  </footer>
   <script>
     require('./renderer.js')
+    feather.replace()
   </script>
 </body>
 
