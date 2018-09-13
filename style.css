@@ -7,16 +7,16 @@ body {
 body {
     background-color: #252A38;
     font-family: 'Roboto', sans-serif;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 footer {
     position: fixed;
     left: 0px;
     bottom: 0px;
-    height: 50px;
+    height: 60px;
     width: 100%;
-    background: #252A38;
+    background: #1D2028;
     color: #fff;
     text-shadow: 0.25px 0.25px #111;
     display: flex;
@@ -35,7 +35,7 @@ footer {
 
 #current-time {
     float: left;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .current-song {
@@ -51,7 +51,7 @@ footer {
     white-space: nowrap;
     left: 0px;
     margin: 0;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: normal;
     text-align: right;
 }
@@ -74,7 +74,7 @@ footer {
 }
 
 #current-artwork {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     margin-left: 10px;
 }

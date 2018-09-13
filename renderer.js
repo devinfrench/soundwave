@@ -7,7 +7,7 @@ const {
 } = require("electron");
 
 const titlebar = new ElectronTitlebarWindows({
-    backgroundColor: "#252A38",
+    backgroundColor: "#1D2028",
     darkMode: true,
     draggable: true
 });
