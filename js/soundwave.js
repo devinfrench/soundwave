@@ -94,8 +94,13 @@ function updateTrackInfo(track) {
     titles.forEach((title) => {
         title.innerText = track.title;
     });
-    document.getElementById("current-artwork").src = track.artwork.replace("-large.", "-badge.");
-    document.getElementById("current-artwork-cover").src = track.artwork.replace("-large.", "-crop.");
+    if (track.artwork) {
+        document.getElementById("current-artwork").src = track.artwork.replace("-large.", "-badge.");
+        document.getElementById("current-artwork-cover").src = track.artwork.replace("-large.", "-crop.");
+    } else {
+        document.getElementById("current-artwork").src = "img/track-cover.jpg";
+        document.getElementById("current-artwork-cover").src = "img/track-cover-large.jpg";
+    }
 }
 
 function nextSong() {
