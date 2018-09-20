@@ -101,7 +101,7 @@ function nextSong() {
 function updateTime(player) {
     let time = player.currentTime() / 1000;
     let min = Math.floor(time / 60);
-    let sec = (Math.floor(time % 60) < 10 ? '0' : '') + Math.floor(time % 60);
+    let sec = (Math.floor(time % 60) < 10 ? "0" : "") + Math.floor(time % 60);
     document.getElementById("current-time").innerText = min + ":" + sec;
     document.getElementById("progress").style.width = player.currentTime() / player.getDuration() * 100 + "%";
 }
