@@ -15,7 +15,19 @@ ready(() => {
                 from: 60000
             }
         }).then((tracks) => {
-            initPlayer(tracks);
+            if (!tracks) return;
+
+            queue.splice(0, queue.length);
+
+            tracks.forEach((track) => {
+                queue.push(new SoundCloudTrack(
+                    track["id"],
+                    track["title"],
+                    track["artwork_url"]
+                ));
+            });
+
+            initPlayer();
         });
     });
 
@@ -32,18 +44,8 @@ ready(() => {
     });
 });
 
-function initPlayer(tracks) {
-    if (!tracks) return;
-
-    queue.splice(0, queue.length);
-
-    tracks.forEach((track) => {
-        queue.push(new SoundCloudTrack(
-            track["id"],
-            track["title"],
-            track["artwork_url"]
-        ));
-    });
+function initPlayer() {
+    if (queue.length == 0 || !queue[0].id) return;
 
     SC.stream(`/tracks/${queue[0].id}`).then((scPlayer) => {
         player = scPlayer;
@@ -92,7 +94,8 @@ function updateTrackInfo(track) {
 }
 
 function nextSong() {
-
+    queue.shift();
+    initPlayer();
 }
 
 function updateTime(player) {
