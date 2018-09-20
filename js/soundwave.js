@@ -9,23 +9,10 @@ ready(() => {
     let search = document.getElementById("search");
     search.addEventListener("submit", (e) => {
         e.preventDefault();
-        SC.get("/tracks", {
-            genres: document.getElementById("genre").value,
-            duration: {
-                from: 60000
-            }
-        }).then((tracks) => {
+        fetchTracks(document.getElementById("genre").value).then((tracks) => {
             if (!tracks) return;
 
-            queue.splice(0, queue.length);
-
-            tracks.forEach((track) => {
-                queue.push(new SoundCloudTrack(
-                    track["id"],
-                    track["title"],
-                    track["artwork_url"]
-                ));
-            });
+            populateQueue(tracks);
 
             initPlayer();
         });
@@ -49,6 +36,14 @@ ready(() => {
         nextSong();
     });
 });
+
+function populateQueue(tracks) {
+    queue.splice(0, queue.length);
+
+    tracks.forEach((track) => {
+        queue.push(track);
+    });
+}
 
 function initPlayer() {
     if (queue.length == 0 || !queue[0].id) return;
@@ -114,6 +109,38 @@ function updateTime(player) {
     let sec = (Math.floor(time % 60) < 10 ? "0" : "") + Math.floor(time % 60);
     document.getElementById("current-time").innerText = min + ":" + sec;
     document.getElementById("progress").style.width = player.currentTime() / player.getDuration() * 100 + "%";
+}
+
+function fetchTracks(genre) {
+    return new Promise((resolve, reject) => {
+        tracks = [];
+        let url = new URL("https://api-v2.soundcloud.com/charts");
+        let params = {
+            kind: "top",
+            genre: "soundcloud:genres:" + genre,
+            region: "soundcloud:regions:US",
+            high_tier_only: "false",
+            client_id: "f06b9e9a56aa303794319cbeb8e12c7d",
+            limit: "50",
+            offset: "0",
+            linked_partitioning: "1"
+        };
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+        fetch(url).then((response) => {
+            return response.json();
+        }).then((chart) => {
+            chart["collection"].forEach((track) => {
+                if (track.track.streamable == true) {
+                    tracks.push(new SoundCloudTrack(
+                        track.track.id,
+                        track.track.title,
+                        track.track.artwork_url
+                    ));
+                }
+            })
+            resolve(tracks)
+        });
+    });
 }
 
 function ready(fn) {
