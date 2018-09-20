@@ -87,7 +87,8 @@ function togglePause() {
 }
 
 function updateTrackInfo(track) {
-
+    document.getElementById("current-title").innerText = track.title;
+    document.getElementById("current-artwork").src = track.artwork;
 }
 
 function nextSong() {
