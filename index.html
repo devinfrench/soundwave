@@ -11,6 +11,12 @@
 
 <body>
   <div id="titlebar"></div>
+  <div class="container">
+    <form id="search">
+      <input id="genre" type="text" placeholder="Genre">
+      <input type="submit" value="Search">
+    </form>
+  </div>
   <footer>
     <div id="play-pause-toggle" data-feather="play"></div>
     <div class="current-song-container">
@@ -29,6 +35,20 @@
     </div>
     <img id="current-artwork" src="http://placehold.it/100x100">
   </footer>
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
+
+  <script src="https://connect.soundcloud.com/sdk/sdk-3.3.0.js"></script>
+  <script src="./js/soundwave.js"></script>
+
+  <script>
+    if (window.module) module = window.module;
+  </script>
+
   <script>
     require('./renderer.js');
     feather.replace({
