@@ -19,6 +19,17 @@ ready(() => {
         });
     });
 
+    let playPauseToggle = document.getElementById("play-pause-toggle");
+    playPauseToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (player && !player.isDead()) {
+            if (player.isPlaying()) {
+                player.pause();
+            } else {
+                player.play();
+            }
+        }
+    });
 });
 
 function initPlayer(tracks) {
