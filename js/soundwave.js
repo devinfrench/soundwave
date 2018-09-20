@@ -1,4 +1,5 @@
 const queue = [];
+let player;
 
 ready(() => {
     SC.initialize({
@@ -16,7 +17,8 @@ ready(() => {
         }).then((tracks) => {
             initPlayer(tracks);
         });
-    })
+    });
+
 });
 
 function initPlayer(tracks) {
@@ -32,29 +34,44 @@ function initPlayer(tracks) {
         ));
     });
 
-    SC.stream(`/tracks/${queue[0].id}`).then((player) => {
-        player.on("pause", togglePause());
-        player.on("play", togglePlay());
-        player.on("play-start", updateTrackInfo(queue[0]));
-        player.on("finish", nextSong());
-        player.on("time", updateTime(player));
+    SC.stream(`/tracks/${queue[0].id}`).then((scPlayer) => {
+        player = scPlayer;
+        player.on("pause", () => {
+            togglePause()
+        });
+        player.on("play", () => {
+            togglePlay()
+        });
+        player.on("play-start", () => {
+            updateTrackInfo(queue[0])
+        });
+        player.on("finish", () => {
+            nextSong()
+        });
+        player.on("time", () => {
+            updateTime(player)
+        });
         player.play();
     });
 }
 
 function togglePlay() {
-    let toggle = document.getElementById("play-pause-toggle");
-    toggle.classList.remove("fa-play");
-    if (!toggle.classList.contains("fa-pause")) {
-        toggle.classList.add("fa-pause");
+    let toggle = document.getElementsByClassName("fa-play")[0];
+    if (toggle) {
+        toggle.classList.remove("fa-play");
+        if (!toggle.classList.contains("fa-pause")) {
+            toggle.classList.add("fa-pause");
+        }
     }
 }
 
 function togglePause() {
-    let toggle = document.getElementById("play-pause-toggle");
-    toggle.classList.remove("fa-pause");
-    if (!toggle.classList.contains("fa-play")) {
-        toggle.classList.add("fa-play");
+    let toggle = document.getElementsByClassName("fa-pause")[0];
+    if (toggle) {
+        toggle.classList.remove("fa-pause");
+        if (!toggle.classList.contains("fa-play")) {
+            toggle.classList.add("fa-play");
+        }
     }
 }
 
