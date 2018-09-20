@@ -15,6 +15,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^2.0.0",
+    "electron-reload": "^1.2.5",
     "electron-titlebar-windows": "^3.0.0"
   }
 }
