@@ -89,8 +89,12 @@ function togglePause() {
 }
 
 function updateTrackInfo(track) {
-    document.getElementById("current-title").innerText = track.title;
-    document.getElementById("current-artwork").src = track.artwork;
+    let titles = Array.from(document.getElementsByClassName("current-title"));
+    titles.forEach((title) => {
+        title.innerText = track.title;
+    });
+    document.getElementById("current-artwork").src = track.artwork.replace("-large.", "-badge.");
+    document.getElementById("current-artwork-cover").src = track.artwork.replace("-large.", "-crop.");
 }
 
 function nextSong() {

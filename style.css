@@ -10,6 +10,60 @@ body {
     overflow: hidden;
 }
 
+.container {
+    padding-top: 20px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.search {
+    width: 100%;
+    position: relative
+}
+
+.search-field {
+    float: left;
+    width: calc(100% - 50px);
+    border: 3px solid #1D2028;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px;
+    outline: none;
+    background-color: #252A38;
+    color: #c1c1c1;
+}
+
+.search-field:focus {
+    color: #fff;
+}
+
+.search-button {
+    position: absolute;
+    right: 0;
+    width: 40px;
+    height: 36px;
+    border: 1px solid #1D2028;
+    background: #1D2028;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.search-wrap {
+    width: 25%;
+}
+
+#current-artwork-cover {
+    padding: 20px 0 10px;
+    height: auto;
+    width: 400px;
+}
+
 footer {
     position: fixed;
     left: 0px;
