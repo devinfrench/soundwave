@@ -6,7 +6,8 @@
   <title>Soundwave</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/feather-icons"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
     </form>
   </div>
   <footer>
-    <div id="play-pause-toggle" data-feather="play"></div>
+    <div id="play-pause-toggle" class="fas fa-play fa-lg"></div>
     <div class="current-song-container">
       <span id="current-time">0:00</span>
       <div class="current-song">
@@ -51,10 +52,6 @@
 
   <script>
     require('./renderer.js');
-    feather.replace({
-      "width": "26px",
-      "height": "26px"
-    });
   </script>
 </body>
 
