@@ -42,6 +42,12 @@ ready(() => {
             }
         }
     });
+
+    let fastForward = document.getElementById("next-song");
+    fastForward.addEventListener("click", (e) => {
+        e.preventDefault();
+        nextSong();
+    });
 });
 
 function initPlayer() {

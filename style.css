@@ -85,8 +85,13 @@ footer {
     align-items: center;
 }
 
-#play-pause-toggle {
+#play-pause-toggle,
+#next-song {
     cursor: pointer;
+}
+
+#next-song {
+    padding-left: 10px;
 }
 
 .current-song-container {
