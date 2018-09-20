@@ -1,4 +1,5 @@
 const queue = [];
+let player;
 
 ready(() => {
     SC.initialize({
@@ -22,13 +23,43 @@ ready(() => {
 function addTracksToQueue(tracks) {
     if (!tracks) return;
 
-    tracks.forEach((track, i) => {
+    tracks.forEach((track) => {
         queue.push(new SoundCloudTrack(
+            track["id"],
             track["title"],
-            track["stream_url"],
             track["artwork_url"]
         ));
     });
+    togglePlayPause();
+}
+
+function togglePlayPause() {
+    if ((!player || player.isDead()) && queue.length == 0) return;
+
+    if (!player && queue.length > 0) {
+        SC.stream(`/tracks/${queue[0].id}`).then((stream) => {
+            player = stream;
+            play();
+        });
+    }
+}
+
+function play() {
+    let toggle = document.getElementById("play-pause-toggle");
+    toggle.classList.remove("fa-play");
+    if (!toggle.classList.contains("fa-pause")) {
+        toggle.classList.add("fa-pause");
+    }
+    player.play();
+}
+
+function pause() {
+    let toggle = document.getElementById("play-pause-toggle");
+    toggle.classList.remove("fa-pause");
+    if (!toggle.classList.contains("fa-play")) {
+        toggle.classList.add("fa-play");
+    }
+    player.pause();
 }
 
 function ready(fn) {
@@ -40,9 +71,9 @@ function ready(fn) {
 }
 
 class SoundCloudTrack {
-    constructor(title, stream, artwork) {
+    constructor(id, title, artwork) {
+        this.id = id;
         this.title = title;
-        this.stream = stream;
         this.artwork = artwork;
     }
 }
